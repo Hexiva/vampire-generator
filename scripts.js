@@ -119,7 +119,7 @@ function langGen(nation) {
 }
 
 function generationGen() {
-  var generationArray = ["8th (Pretender Elder)","9th (Ancilla)", "8th (Pretender Elder)","9th (Ancilla)", "8th (Pretender Elder)","9th (Ancilla)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)","10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)","10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)",  "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "14th (Neonate)","15th (Neonate)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "14th (Neonate)","15th (Neonate)"]
+  var generationArray = ["8th (Pretender Elder)","9th (Ancilla)", "8th (Pretender Elder)","9th (Ancilla)", "8th (Pretender Elder)","9th (Ancilla)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)","10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)","10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)",  "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "14th (Thin-Blooded)","15th (Thin-Blooded)", "10th (Ancilla)", "11th (Neonate)", "12th (Neonate)", "13th (Neonate)", "14th (Thin-Blooded)","15th (Thin-Blooded)"]
   var generation = generate(generationArray);
   return generation;
 }
@@ -166,10 +166,10 @@ function bornGen(generation){
   } else if (generation ==="13th (Neonate)"){
     var embraced = getRandomInt(0, 253);
     return embraced;
-  } else if (generation ==="14th (Neonate)"){
+  } else if (generation ==="14th (Thin-Blooded)"){
     var embraced = getRandomInt(0, 153);
     return embraced;
-  } else if (generation ==="15th (Neonate)"){
+  } else if (generation ==="15th (Thin-Blooded)"){
     var embraced = getRandomInt(0, 101);
     return embraced;
   }else {
@@ -220,11 +220,57 @@ function gangrelWeakness (pronoun3){
   return trait;
 }
 
-function clanGen(sect){
-  var clanCamArray = ["Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Lasombra",]
-  var clanSabArray = ["Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce",]
-  var clanFlatArray = ["Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Lasombra", "Tzimisce",]
-  if (sect === "Camarilla") {
+function bloodlineGen(sect,clan, gender){
+  if (clan === "Banu Haqim"){
+    var bloodlines = ["","", "","","","Vizier", "Sorcerer"]
+  } else if (clan === "Brujah"){
+    var bloodlines = ["","", "","True Brujah"]
+  } else if (clan === "Followers of Set"){
+    var bloodlines = ["","", "Vipers","Tlacique"]
+  } else if (clan === "Gangrel"){
+    var bloodlines = ["","", "Coyote", "","", "Coyote","","", "Coyote", "","", "Coyote", "","", "Coyote", "Noiad"]
+    if (sect === "Camarilla"){
+      var bloodlines = ["","", "Coyote", "","", "","", "","", "","", "Coyote", "Noiad"]
+    }
+    if (gender === "Female"){
+      bloodlines.push("Ahrimanes");
+    }
+  } else if (clan === "Giovanni"){
+    var bloodlines = ["","","","","","Premascine"]
+  } else if (clan === "Lasombra"){
+    var bloodlines = ["","","","","","","","","Kiasyd"]
+  } else if (clan === "Malkavian"){
+    var bloodlines = ["Ananke", "Knights of the Moon", "","","",]
+  }  else if (clan === "Toreador"){
+    var bloodlines = ["Volgirre", "Ishtarri","Ishtarri","Ishtarri", "","","","","","",]
+  } else if (clan === "Tremere" && sect === "Sabbat"){
+    var bloodlines = ["Telyav", "","","","","","",]
+  } else if (clan === "Tremere"){
+    var bloodlines = ["Telyav", "","","","","","","","","","","","","","","","","","","","","","","","",]
+  }  else if (clan === "Tzimisce"){
+    var bloodlines = ["Koldun","Carpathian","Carpathian", "","","","","","",]
+  } else if (clan === "Ventrue"){
+    var bloodlines = ["Crusader", "","","","","","",]
+  } else {
+    var bloodlines = [""]
+  }
+  var bloodline = generate(bloodlines);
+  if (bloodline != ""){
+      var bloodline = " (" + bloodline + ")";
+  }
+
+  return bloodline;
+}
+
+function clanGen(sect, generation){
+  var clanCamArray = ["Caitiff","Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu","Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Toreador", "Tremere", "Ventrue", "Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu",  "Toreador", "Tremere", "Ventrue", "Lasombra",]
+  var clanSabArray = ["Caitiff","Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce","Lasombra", "Tzimisce",]
+  var clanRareArray = ["Baali", "Cappadocians", "Salubri","Daughters of Cacophony","Gargoyles", "Followers of Set"]
+  var clanFlatArray = ["Caitiff","Banu Haqim", "Brujah", "Gangrel", "Hecata",  "Malkavian", "Nosferatu", "Ravnos", "Toreador", "Tremere", "Ventrue", "Lasombra", "Tzimisce", generate(clanRareArray), ]
+  if (generation=== "14th (Thin-Blooded)" || generation === "15th (Thin-Blooded)"){
+    var clan = "Caitiff";
+  }
+  else if (sect === "Camarilla") {
     var clan = generate(clanCamArray);
   } else if (sect === "Sabbat"){
     var clan = generate(clanSabArray);
@@ -264,6 +310,7 @@ $(document).ready(function() {
       species: "Vampire",
       generation: generationGen(),
       clan: "error",
+      bloodline: "",
       // skinColor: "error",
       // eyeColor: "error",
       // hairColor: "error",
@@ -284,8 +331,11 @@ $(document).ready(function() {
 char1.lang = langGen(char1.nation);
 char1.name = firstNameGen(char1.lang, char1.gender);
 char1.surname = lastNameGen(char1.lang);
-char1.clan = clanGen(char1.sect);
+char1.clan = clanGen(char1.sect, char1.generation);
+char1.bloodline = bloodlineGen(char1.sect, char1.clan, char1.gender);
 // char1.clan = "Ventrue";
+
+char1.bloodline = bloodlineGen(char1.sect, char1.clan,char1.gender);
 
 char1.born = bornGen(char1.generation);
 char1.bornYear = 2022-char1.born;
@@ -361,6 +411,7 @@ if (char1.clan ==="Gangrel") {
     $("#char1").show();
     $(".name").text(char1.name + " "+ char1.surname);
     $(".clan").text(char1.clan);
+    $(".bloodline").text(char1.bloodline);
     $(".age").text(monthGen() + char1.bornYear);
     $(".sect").text(char1.sect);
     $(".embraced").text("In " + char1.embracedYear + " at age " + char1.ageHuman);
