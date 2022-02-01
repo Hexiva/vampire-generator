@@ -320,7 +320,7 @@ $(document).ready(function() {
       pronoun2: "",
       pronoun3: "",
       pronoun4: "",
-      clanWeakness:"error",
+      clanWeakness:"",
       // bodyType: generate(humanBodyArray),
       // height: generate(humanHeightArray),
       // ifMulticlass:"no",
